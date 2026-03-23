@@ -62,12 +62,11 @@ public class HotelManagementSystem {
             sc.nextLine();
         }
     }
+    static ArrayList<Room> avail = new ArrayList<>();
 
     static void displayAvailableRooms() {
-        if (rooms.isEmpty()) {
-            System.out.println("No rooms available.");
-            return;
-        }
+        
+        
 
         Collections.sort(rooms, Comparator.comparingDouble(r -> r.price));
 
@@ -77,11 +76,17 @@ public class HotelManagementSystem {
         while (it.hasNext()) {
             Room r = it.next();
             if (r.isAvailable) {
+                avail.add(r);
                 System.out.println("Room No: " + r.roomNumber +
                         " | Type: " + r.roomType +
                         " | Price: " + r.price);
             }
         }
+        if (avail.isEmpty()) {
+            System.out.println("No rooms available.");
+            return;
+        }
+        
     }
 
     static void addCustomer() {
@@ -197,7 +202,7 @@ public class HotelManagementSystem {
                     " | Room: " + (c.roomNumber == -1 ? "Not Booked" : c.roomNumber));
         }
     }
-    
+
     public static void main(String[] args) {
 
         while (true) {
